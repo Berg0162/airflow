@@ -6,6 +6,6 @@ etctera...
 
 Work in progress...
 # Electronic Components and Circuitry<br>
-<img src="../main/images/AF_circuitry.png" width="900" height="500" ALIGN="center" alt="Circuitry" > <br>
+<img src="../main/images/AF_circuitry.png" width="900" height="500" ALIGN="middle" alt="Circuitry" > <br>
 
-<img src="../main/images/Duty_Cycle_animation.gif" width="200" height="200" ALIGN="center" alt="Duty Cycle" > <br>
+<img src="../main/images/Duty_Cycle_animation.gif" width="200" height="160" ALIGN="right" alt="Duty Cycle" > <br>
