@@ -19,9 +19,8 @@ For our Arduino Feather nRF52 Express a dedicated Timer/Interrupt handling libra
 I am much obliged to Cedric Honnet who designed the Timer library initially as a part of the Hivetracker project, ref: [Original Hivetracker Timer library](https://github.com/HiveTracker/Timer). The library code has been updated to conform the more recent nRF52-timer implementations on nRF52 boards.<br>
 
 # All Relevant Code Snippets in Main program for handling duty cycles of both fans<br>
-<img src="../main/images/Duty_Cycle_animation.gif" width="200" height="160" ALIGN="right" alt="Duty Cycle" >
+<img src="../main/images/Duty_Cycle_animation.gif" width="150" height="100" ALIGN="right" alt="Duty Cycle" >
 The global variables <b>ActualUpperFanPerc</b> and <b>ActualLowerFanPerc</b> are determined by the outcome of the Heat-Balance-Equation and set to the appropriate percentage of fan capacity (0-100%) and this is translated to precise time intervals (in microseconds) for the duty cycle by <b>SetBothFanPeriods(void)</b>. Every 10 milliseconds a Zero Cross (external) interrupt is detected and the duty cycles for both fans are set separately using 2 of the accurate internal nRF52 microsecond-timers.<br clear="left">
-<br clear="left">
 
 ```C++
 #include <nrf_timer.h> // Native nRF52 timers library
