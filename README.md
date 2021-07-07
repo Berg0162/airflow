@@ -21,8 +21,8 @@ I am much obliged to Cedric Honnet who designed the Timer library initially as a
 # All Relevant Code Snippets in Main program for handling duty cycles of both fans<br>
 <img src="../main/images/Duty_Cycle_animation.gif" width="200" height="160" ALIGN="right" alt="Duty Cycle" >
 The global variables <b>ActualUpperFanPerc</b> and <b>ActualLowerFanPerc</b> are determined by the outcome of the Heat-Balance-Equation and set to the appropriate percentage of fan capacity (0-100%) and this is translated to precise time intervals (in microseconds) for the duty cycle by <b>SetBothFanPeriods(void)</b>. Every 10 milliseconds a Zero Cross (external) interrupt is detected and the duty cycles for both fans are set separately using 2 of the accurate internal nRF52 microsecond-timers.<br clear="left">
-<br>
-<br>
+<br clear="left">
+
 ```C++
 #include <nrf_timer.h> // Native nRF52 timers library
 #include <Timer.h>     // Heavy duty micro(!)seconds timer library based on nRF52 timers, needs to reside in the libraries folder
