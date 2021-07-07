@@ -15,9 +15,31 @@ For our Arduino Feather nRF52 Express a dedicated Timer/Interrupt handling libra
 
 
 ```C++
-const unsigned char Page[]
+// Values are in microseconds and a half 50Hz cycle is 10.000us = 10 ms !
+#define MAX_TIME_OFF_UPPER (6950U) // Maximal time of half an AC Cycle (10.000us) to be CUT-OFF in microseconds!
+#define MAX_TIME_OFF_LOWER (6920U) // Maximal time of half an AC Cycle (10.000us) to be CUT-OFF in microseconds!
+#define MIN_TIME_OFF (2000U)   // Minimal time to process for full power --> NO (!) CUT-OFF situation in microseconds!
 ```
 
+```C++
+void zero_Cross_ISR(void) {
+  // Normal mode
+  digitalWrite(PWM_PIN_L_FAN, LOW); // Set AC cycle OFF --> LOW
+  digitalWrite(PWM_PIN_U_FAN, LOW); // Set AC cycle OFF --> LOW
+
+  NrfTimer2.attachInterrupt(&LFanDutyCycleEnds, ActualLowerFanPeriod); // microseconds !
+  NrfTimer1.attachInterrupt(&UFanDutyCycleEnds, ActualUpperFanPeriod); // microseconds !
+}
+
+void UFanDutyCycleEnds(void) {
+  digitalWrite(PWM_PIN_U_FAN, HIGH); // Set AC cycle ON --> HIGH
+}
+
+void LFanDutyCycleEnds(void) {
+  digitalWrite(PWM_PIN_L_FAN, HIGH); // Set AC cycle ON --> HIGH
+}
+
+```
 
 
 
