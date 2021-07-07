@@ -17,6 +17,7 @@ For our Arduino Feather nRF52 Express a dedicated Timer/Interrupt handling libra
 [View the code of the Timer library](../main/arduino/libraries/Timer/Timer.cpp) <br>
 [View the header of the Timer library](../main/arduino/libraries/Timer/Timer.h) <br>
 
+I am must obliged to Cedric Honnet who designed the Timer library initially as a part of the Hivetracker project [Original Hivetracker Timer library](https://github.com/HiveTracker/Timer). The library code has been updated to conform the more recent nRF52-timer implementations on nRF52 boards.<br>
 <b>All Relevant Code Snippets in Main program</b>
 ```C++
 #include <nrf_timer.h> // Native nRF52 timers library
