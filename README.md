@@ -17,12 +17,22 @@ For our Arduino Feather nRF52 Express a dedicated Timer/Interrupt handling libra
 [View the code of the Timer library](../main/arduino/libraries/Timer/Timer.cpp) <br>
 [View the header of the Timer library](../main/arduino/libraries/Timer/Timer.h) <br>
 
+<b>All Relevant Code Snippets in Main program</b>
+```C++
+#include <nrf_timer.h> // Native nRF52 timers library
+#include <Timer.h>     // Heavy duty micro(!)seconds timer library based on nRF52 timers, needs to reside in the libraries folder
+```
 
 ```C++
+// Feather nRF52840 I/O Pin declarations for connection to the ROBOTDYN AC DIMMER boards
+#define PWM_PIN_U_FAN  (12U) // Upper Fan 
+#define ISR_PIN        (11U) // AC Cycle Zero Cross detection pin (for both FANS)
+#define PWM_PIN_L_FAN  (10U) // Lower FAN
+
 // Values are in microseconds and a half 50Hz cycle is 10.000us = 10 ms !
 #define MAX_TIME_OFF_UPPER (6950U) // Maximal time of half an AC Cycle (10.000us) to be CUT-OFF in microseconds!
 #define MAX_TIME_OFF_LOWER (6920U) // Maximal time of half an AC Cycle (10.000us) to be CUT-OFF in microseconds!
-#define MIN_TIME_OFF (2000U)   // Minimal time to process for full power --> NO (!) CUT-OFF situation in microseconds!
+#define MIN_TIME_OFF (2000U)       // Minimal time to process for full power --> NO (!) CUT-OFF situation in microseconds!
 ```
 
 ```C++
