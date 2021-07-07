@@ -55,5 +55,13 @@ void LFanDutyCycleEnds(void) {
 
 ```
 
+```C++
+void SetBothFanPeriods(void) {
+  // ------------------------------------------------------------------------
+  ActualUpperFanPeriod = int(map(ActualUpperFanPerc, 0, 100, MAX_TIME_OFF_UPPER, MIN_TIME_OFF));
+  ActualLowerFanPeriod = int(map(ActualLowerFanPerc, 0, 100, MAX_TIME_OFF_LOWER, MIN_TIME_OFF));
+}
+```
+
 
 
