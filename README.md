@@ -1,4 +1,4 @@
-# <img src="../master/images/AF_logo.png" width="64" height="64" alt="Airflow Icon"> &nbsp; Airflow
+# <img src="../main/images/AF_logo.png" width="64" height="64" alt="Airflow Icon"> &nbsp; Airflow
 # AIRFLOW
 Thermoregulated Airflow Cooling for Indoor Cycling
 
