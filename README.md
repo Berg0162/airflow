@@ -2,7 +2,7 @@
 
 # Thermoregulated Airflow Cooling for Indoor Cycling <br>
 The <b>AIRFLOW</b> is a smart device that accurately generates the ideal airflow velocity for an optimally thermoregulated human body when heat production balances heat loss. Every minute the <b>AIRFLOW</b> smart device determines the very appropriate airflow velocity to reconcile the Heat Balance Equation (<b>H - R - C - E = S</b>). For indoor cycling on a static trainer a stable Heat Balance is paramount. Thermal heat stress may seriously affect the performance, overall productivity, safety and health of an individual. Discomfort at least, even heat illness and at worst heat stroke are three phases of the reaction of the human body when exposed to an unstable Heat Balance (hot, humid environment and inadequate airflow). <br>
-<img src="../main/images/HeatBalancePic_small.png" width="900" height="200" alt="Heat Balance">
+<img src="../main/images/HeatBalancePic_small.png" width="900" height="100" alt="Heat Balance">
 The <b>AIRFLOW</b> smart device continuously tunes the requested airflow velocity for a stable Heat Balance during all phases of an indoor cycling workout, warm-up, intensity intervals, intermittent recovery and at cooldown. The cyclist has no on-the-way interference and can fully concentrate on the demands of the stationay trainer workout, always facing the ideal airstream that will cool him/her appropriately. <br>
 
 etctera...
