@@ -36,7 +36,7 @@ Ambient air temperature and relative humidity are critical variables during any 
 In the following image the wiring of the electronic components is shown.<br>
 <img src="../main/images/AF_circuitry.png" width="900" height="500" ALIGN="middle" alt="Circuitry" > <br>
 
-# Controlling Air Velocity with PWM <br>
+# Controlling Air Velocity of Fans with PWM <br>
 
 The AC Dimmer Module by Robotdyn is designed to control Alternating Current/voltage (110/220V). It can control AC levels up to 400V/8А. In most cases, the AC Dimmer Module is used to turn the power ON/OFF or <b>dim</b> lamps or heating elements. It can be used as well with fans, pumps, air cleaners, etcetera. A major benefit of the Robotdyn board is that the 110/220V part is (optically) isolated from the 5V logical control part, to minimize the possibility of high voltage damage of the attached low voltage microcontroller. The logical level of the Dimmer Module is tolerant to 5V and 3.3V, therefore it can be connected to a microcontroller with 5V and 3.3V level logic. <br>
 <img src="../main/images/Duty_Cycle_animation.gif" width="160" height="110" ALIGN="right" alt="Duty Cycle" >
@@ -196,5 +196,7 @@ void HeatBalanceAlgorithm(void) {
   }
 }
 ```
+# Airflow Companion App <br>
+<img src="../main/images/AIRFLOW_app.jpg" width="800" height="800" ALIGN="middle" alt="Companion app" > <br>
 
 
