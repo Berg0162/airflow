@@ -7,12 +7,13 @@ The <b>AIRFLOW</b> is a smart device that accurately generates the ideal airflow
 The <b>AIRFLOW</b> smart device continuously tunes the requested airflow velocity for a stable Heat Balance during all phases of an indoor cycling workout, warm-up, intensity intervals, intermittent recovery and at cooldown. The cyclist has no on-the-way interference and can fully concentrate on the demands of the stationay trainer workout, always facing the ideal airstream that will cool him/her appropriately. <br>
 
 # What is needed to determine the critical variables of the Heat Balance Equation <br>
-* Heart Rate Monitor (Dual ANT+ and) Bluetooth LE transmitter 
+
+* <b>Heart Rate Monitor (Dual ANT+ and) Bluetooth LE transmitter</b> 
 <img src="../main/images/heart_rate_monitor.jpg" width="200" height="150" ALIGN="right" alt="Heart rate monitor" > <br>
 The AIRFLOW device needs continuous measurement of the heart rate to determine the critical mean body temperature which is proportional to the netto heat that is stored in the body. Most cyclists are used to wear a heart rate band during a workout and when that band is transmitting data over BLE it will be suitable for the AIRFLOW device. Notice that many of the (older) devices allow only <b>one</b> BLE connection at the time, which means that you cannot concurrently connect your cyling computer and Zwift computer and/or AIRFLOW device over BLE with the heart rate band... If possible: Use ANT+ for regular connections and only BLE for the AIRFLOW device!
 <br clear="left">
 
-* A Power meter with (Dual ANT+ and) Bluetooth LE transmitter
+* <b>A Power meter with (Dual ANT+ and) Bluetooth LE transmitter</b>
 <img src="../main/images/power_meters.png" width="350" height="200" ALIGN="right" alt="Power meters" > <br>
 The AIRFLOW device needs continuous measurement of the critical cycling power, produced during a workout, to determine how much energy the body is generating.
 The Power meter of your smart indoor trainer can supply the power measurements that you push during a workout. Or a dedicated power meter mounted on the bike at the crank, pedals or rear hub as long as it is capable of transmitting power data over Bluetooth Low Energy (BLE). Notice that many of the (older) devices allow only <b>one</b> BLE connection at the time, which means that you cannot concurrently connect your cyling computer and Zwift computer and/or AIRFLOW device over BLE with the power meter... If possible: Use ANT+ for regular connections and only BLE for the AIRFLOW device!
@@ -28,6 +29,7 @@ Ambient air temperature and relative humidity are critical variables during any 
 * Adafruit Feather nRF52840 Express
 * Table Fan 220/110 Volt AC 50/60 hz
 <img src="../main/images/AF_circuitry.png" width="900" height="500" ALIGN="middle" alt="Circuitry" > <br>
+
 # PWM <br>
 
 The AC Dimmer Module by Robotdyn is designed to control Alternating Current/voltage (110/220V). It can control AC levels up to 400V/8А. In most cases, the AC Dimmer Module is used to turn the power ON/OFF or <b>dim</b> lamps or heating elements. It can be used as well with fans, pumps, air cleaners, etcetera. A major benefit of the Robotdyn board is that the 110/220V part is (optically) isolated from the 5V logical control part, to minimize the possibility of high voltage damage of the attached low voltage microcontroller. The logical level of the Dimmer Module is tolerant to 5V and 3.3V, therefore it can be connected to a microcontroller with 5V and 3.3V level logic. <br>
