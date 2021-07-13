@@ -198,5 +198,10 @@ void HeatBalanceAlgorithm(void) {
 ```
 # Airflow Companion App <br>
 <img src="../main/images/AIRFLOW_app.jpg" width="800" height="800" ALIGN="middle" alt="Companion app" > <br>
-
+From the start of the was decided to develop a AIRFLOW Companion App that would allow changing settings and if all went wrong to allow a strict manual control of the fans.
+I have little experience with App development and decided to build one (for Android) in the accessible environment of [MIT App Inventor 2](https://appinventor.mit.edu).<br>
++ Download the <b>MIT App Inventor</b> AIRFLOW Companion App code with extension *file*<b>.aia</b>
++ [Visit at AppInventor](https://appinventor.mit.edu), You can get started by clicking the orange "Create Apps!" button from any page on the website.
++ Get started and upload the AIRFLOW Companion App code.
++ Or upload the AIRFLOW Companion App <b>APK</b> to your Android device directly and install the APK. Android will call this a security vulnerability!
 
