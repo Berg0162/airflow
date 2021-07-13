@@ -6,7 +6,7 @@ The <b>AIRFLOW</b> is a smart device that accurately generates the ideal airflow
 
 The <b>AIRFLOW</b> smart device continuously tunes the requested airflow velocity for a stable Heat Balance during all phases of an indoor cycling workout, warm-up, intensity intervals, intermittent recovery and at cooldown. The cyclist has no on-the-way interference and can fully concentrate on the demands of the stationay trainer workout, always facing the ideal airstream that will cool him/her appropriately. <br>
 
-# What is needed to determine the critical variables of Heat Balance Equation <br>
+# What is needed to determine the critical variables of the Heat Balance Equation <br>
 * Heart Rate Monitor (Dual ANT+ and) Bluetooth LE transmitter <br>
 The AIRFLOW device needs continuous measurement of the heart rate to determine the critical mean body temperature which is proportional to the netto heat that is stored in the body. Most cyclists are used to wear a heart rate band during a workout and when that band is transmitting data over BLE it will be suitable for the AIRFLOW device. Notice that many of the (older) devices allow only <b>one</b> BLE connection at the time, which means that you cannot concurrently connect your cyling computer and Zwift computer and/or AIRFLOW device over BLE with the heart rate band... If possible: Use ANT+ for regular connections and only BLE for the AIRFLOW device!
 * A Power meter with (Dual ANT+ and) Bluetooth LE transmitter<br>
