@@ -96,7 +96,8 @@ void SetBothFanPeriods(void) {
 }
 ```
 # Code snippet of Heat Balance Equation routine
-Notice that Heart rate (HRM) and cycling Power (CPS) is measured at their respective device dependent frequencies, usually once to 4 times per second! The incoming HRM and CPS data are stored and processed continously. Once per minute the <b>HeatBalanceAlgorithm</b> routine is called to calculate all terms of the Heat Balance Equation and to update the appropriate airflow velocity of the fans.
+Notice that Heart Rate (HRM) and Cycling Power (CPS) is measured at their respective device dependent frequencies, usually once to 4 times per second! The incoming HRM and CPS data are processed continously. Once per minute the <b>HeatBalanceAlgorithm</b> routine is called to calculate all terms of the Heat Balance Equation and to update the appropriate airflow velocity of the fans.
+
 ```C++
 void HeatBalanceAlgorithm(void) {
   double F2, F3;
