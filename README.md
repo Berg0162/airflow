@@ -19,7 +19,7 @@ The AIRFLOW device needs continuous measurement of the critical cycling power, p
 The Power meter of your smart indoor trainer can supply the power measurements that you push during a workout. Or a dedicated power meter mounted on the bike at the crank, pedals or rear hub as long as it is capable of transmitting power data over Bluetooth Low Energy (BLE). Notice that many of the (older) devices allow only <b>one</b> BLE connection at the time, which means that you cannot concurrently connect your cyling computer and Zwift computer and/or AIRFLOW device over BLE with the power meter... If possible: Use ANT+ for regular connections and only BLE for the AIRFLOW device!
 <br clear="left">
 
-* Temperature & Humidity Sensor <br>
+* <b>Temperature & Humidity Sensor</b> <br>
 Ambient air temperature and relative humidity are critical variables during any serious workout. These are measured with a Adafruit sensor continously and is part of the electronic circuitry that processes all measurements! <br>
 
 # Electronic Components and Circuitry<br>
