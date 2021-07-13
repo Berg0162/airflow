@@ -27,8 +27,9 @@ Ambient air temperature and relative humidity are critical variables during any 
 * Adafruit OLED 128x64 I2C blue display
 * Robotdyn AC Light Dimmer Module, 1 Channel, 3.3V/5V logic, AC 50/60hz, 220V/110V
 * Adafruit Feather nRF52840 Express
-* Table Fan 220/110 Volt AC 50/60 hz<br>
-In the following image the wiring of the components is shown.<br>
+* Table Fan 220/110 Volt AC 50/60 hz
+<br>
+In the following image the wiring of the electronic components is shown.<br>
 <img src="../main/images/AF_circuitry.png" width="900" height="500" ALIGN="middle" alt="Circuitry" > <br>
 
 # PWM <br>
