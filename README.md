@@ -3,9 +3,9 @@
 # Thermoregulated Airflow Cooling for Indoor Cycling <br>
 The <b>AIRFLOW</b> is a smart device that accurately generates the ideal airflow velocity for an optimally thermoregulated human body when heat production balances heat loss. Every minute the <b>AIRFLOW</b> smart device determines the very appropriate airflow velocity to reconcile the Heat Balance Equation.
 <img src="../main/images/HeatBalancePic_small.png" width="400" height="100" align = "right" alt="Heat Balance"> For indoor cycling on a static trainer a stable Heat Balance is paramount. Thermal heat stress may seriously affect the performance, overall productivity, safety and health of an individual. Discomfort at least, even heat illness and at worst heat stroke are three phases of the reaction of the human body when exposed to an unstable Heat Balance (hot, humid environment and inadequate airflow). <br clear="left">
-<img src="../main/images/AIRFLOW_equation.png" width="500" height="140" align = "middle" alt="Airflow equation"> <br>
+<img src="../main/images/AIRFLOW_equation.png" width="500" height="140" align = "right" alt="Airflow equation">
 The Heat Balance Equation can be rewritten in such a way that the requested Airflow Velocity (<b>Va</b>) is a function of the other terms and can be calculated at any time!
-The <b>AIRFLOW</b> smart device continuously tunes accordingly the requested airflow velocity of the fan(s) for a stable Heat Balance during all phases of an indoor cycling workout, warm-up, intensity intervals, intermittent recovery and at cooldown. The cyclist has no on-the-way interference and can fully concentrate on the demands of the stationay trainer workout, always facing the ideal airstream that will cool him/her appropriately. <br>
+The <b>AIRFLOW</b> smart device continuously tunes accordingly the requested airflow velocity of the fan(s) for a stable Heat Balance during all phases of an indoor cycling workout, warm-up, intensity intervals, intermittent recovery and at cooldown. The cyclist has no on-the-way interference and can fully concentrate on the demands of the stationay trainer workout, always facing the ideal airstream that will cool him/her appropriately. <br clear="left">
 
 # What is needed to determine the critical variables of the Heat Balance Equation <br>
 
