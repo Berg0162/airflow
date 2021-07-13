@@ -95,6 +95,104 @@ void SetBothFanPeriods(void) {
   ActualLowerFanPeriod = int(map(ActualLowerFanPerc, 0, 100, MAX_TIME_OFF_LOWER, MIN_TIME_OFF));
 }
 ```
+# Code snippet of Heat Balance Equation routine
+Notice that Heart rate (HRM) and cycling Power (CPS) is measured at their respective device dependent frequencies, usually once to 4 times per second! The incoming HRM and CPS data are stored and processed continously. Once per minute the <b>HeatBalanceAlgorithm</b> routine is called to calculate all terms of the Heat Balance Equation and to update the appropriate airflow velocity of the fans.
+```C++
+void HeatBalanceAlgorithm(void) {
+  double F2, F3;
+  float DeltaPska, DeltaTska, Psa;
+  float Psk = 0.0; // Partial vapor pressure at skin temperature
+  float Pair = 0.0; // Partial vapor pressure at ambient air temperature
+  // -----------------------------------------------------------------------------------------------
+  // NOTICE: Dry-Bulb Temperature EQUALS, in indoors situation, the Ambient Air Temperature --> Tdb = Tair
+  //------------------------------------------------------------------------------------------------
+  // Algorithm that estimates Core Temp. based on HeartRateMeasurement >>>>> AT ONE MINUTE INTERVALS !!
+  if (IsConnectedToHRM) { // Only calculate and update Core Temperature when connected to HRM-strap
+    EstimateTcore(Tcore_prev, v_prev, (double)HBM_average); // Estimate the Core Body Temperature from Heart Beat sequence
+  }
+  v_prev = v_cur;
 
+  // Calculate environmental variables
+  Psa = (float)Pantoine((double)Tair); // in units kPa
+  Pair = RH * Psa; // saturated water vapour pressure at ambient temperature corrected for Relative Humidity (default = 70%)
+
+  // Calculate Metabolic Energy
+  MetEnergy = (double)( CPS_average * ((float)(100 / GE)) ) / Ad; // in Joules/m2 --> individualized (div Ad)
+
+  // Estimate now the mean body skin temperature from
+  Tskin = EstimateSkinTemp(Tair, Pair, Vair, MetEnergy, (float)Tcore_cur);
+
+  // Continued: Calculate environmental variables and determine the appropriate Delta's
+  Psk = (float)Pantoine((double)Tskin); // saturated water vapour pressure at the wetted skin surface in units kPa
+  DeltaPska = (Psk - Pair); // Calculate the DeltaPska pKa
+  DeltaTska = (Tskin - Tair); // Calculate DeltaTska in degrees Celsius
+
+  // Determine now the Mean Body Temperature from estimated Core Temperature and mean estimated Skin temperature
+  Tbody_cur = (float)0.67 * Tcore_cur + 0.33 * Tskin; // equation according to Kerslake, 1972 (confirmed in other papers)
+
+  // Calculate how much heat has been produced since previous round
+  if (IsConnectedToHRM) { // Only calculate and update HeatChange when connected to HRM-strap
+    if (Tcore_cur > Tcore_start) { // Skip first measurement(s) until a steady effort is delivered --> Tcore_start temperature has reached!
+      DeltaStoredHeat = HeatChange(Tbody_cur, Tbody_prev, HC_Interval); // Heat Change calculated in J/m2
+    } else {
+      DeltaStoredHeat = 0.0;
+    }
+  }
+  // ...... some tweaking ....
+  if ( (DeltaStoredHeat < 0) && TWEAK ) { // TWEAK Heat loss  !
+    StoredHeat += (1.50*DeltaStoredHeat); // Tcore-algorithm underestimates Heat Loss (Cool down) --> Increase artificially Heat Loss contribution !!!
+  } else {
+    StoredHeat += DeltaStoredHeat;   // equation  S == internally stored body heat NO Tweaking
+  }
+
+  // Calculate Core Temp change
+  DeltaTc = (Tcore_cur - Tcore_prev);
+
+  // Store the actual T-results now for comparison in the next round to determine the T-Delta's
+  Tcore_prev = Tcore_cur;
+  Tbody_prev = Tbody_cur;
+
+  // Calculate Terms from Heat balance equation
+  F2 = (double)(Hc * DeltaTska + He * DeltaPska); // equation  1 (C+E) without Va(exp 0.84)
+  Radiation = (double)Hr * DeltaTska;        // equation  Radiation heat exchange
+
+  // equation component H  use CPS_average for "External Work"
+  HeatProduced = (double)( CPS_average * ((float)(100/GE) - 1) ) / Ad; // in J/m2 equation 1 H = (M-W)/Ad & GE = W/M -> M = W/GE
+  SumHeatProduced += HeatProduced * HC_Interval / 1000; // sum of total heat produced during the workout, units in kJ/m2
+  SumEnergyProduced += MetEnergy * HC_Interval / 1000; // in kJ/m2 --> individualized
+
+  // Solve Full Heat Balance equation with Power HeatProduced (H) AND HeatStored (S) to find air velocity !
+  // Heat Balance equation:
+  // StoredHeat represents the stored internal heat (S) that is to be removed together with the produced heat (H),
+  // the sum of both (!) is the heat we want to exchange with the environment...
+  F3 = (HeatProduced + StoredHeat - Radiation) / F2; // right side of the FULL heat balance equation S = StoredHeat
+  // POW with decimal exponent (1.1905) can't process a negative base (F3), --> POW equation gives "nan" result!
+  if ( F3 > 0 ) {
+    Vair = (float)pow(F3, 1.1905);         // in equation exp == 0.84 --> 84/100 -> 100/84 = 1.1905
+  } else Vair = 0.0;
+
+  // Now that we know Va, C and E can be re-calculated !! Notice H and R are independent of airflow speed so they hold the same values!!
+  Convection = (float)pow((double)Vair, 0.84) * Hc * DeltaTska; // 0.84 to conform with previous calculations !!
+  Ereq = (float)(HeatProduced + StoredHeat - Radiation - Convection); // Requested Evaporative Heat exchange with the environment
+  if (Ereq < 0) {
+    Ereq = 0;  // in startup phase value can be negative force to zero !
+  }
+  //Sweat Rate = (147 + 1.527*Ereq - 0.87*Emax) --> The Original equation of Conzalez et al. 2009
+  // Adapted since in our heat balance equation Ereq = Emax (by definition!) -> rewritten to: SwRate = 147 +(0.657*Ereq)
+  if (Ereq > 0) {
+    SwRate = (147 + (0.657 * Ereq)); // per milli liter fluid is equal to weight in grams -> Notice SwRate is in gr/m2/hour
+  } else SwRate = 0;
+
+  HeatState = HeatBalanceState((int)Ereq);
+
+  if (OpMode == HEATBALANCE) { // Values have changed -> translate to Airflow intensity
+    ActualUpperFanPerc = (uint16_t)(AirFlowToFanPercFactor[BikePos]*Vair + 0.5); // conversion from outcome Heat-Balance-Equation to percentage Fan intensity
+    ActualUpperFanPerc = constrain(ActualUpperFanPerc, 0, 100);
+    AdjustForFanBalance();
+    SetFanThresholds();
+    SetBothFanPeriods(); // Translate Perc to Millis Duty cycle Fan operation
+  }
+}
+```
 
 
