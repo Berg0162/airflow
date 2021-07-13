@@ -22,12 +22,14 @@ The Power meter of your smart indoor trainer can supply the power measurements t
 * <b>Temperature & Humidity Sensor</b> <br>
 Ambient air temperature and relative humidity are critical variables during any serious workout. These are measured with a Adafruit sensor continously and is part of the electronic circuitry that processes all measurements! <br>
 
-# Electronic Components and Circuitry<br>
+# Electronic Components and Circuitry of AIRFLOW device<br>
 * Adafruit Sensirion SHT31-D - Temperature & Humidity Sensor
 * Adafruit OLED 128x64 I2C blue display
 * Robotdyn AC Light Dimmer Module, 1 Channel, 3.3V/5V logic, AC 50/60hz, 220V/110V
 * Adafruit Feather nRF52840 Express
 * Table Fan 220/110 Volt AC 50/60 hz
+<br>
+In the following image the wiring of the electronic components is shown.<br>
 <img src="../main/images/AF_circuitry.png" width="900" height="500" ALIGN="middle" alt="Circuitry" > <br>
 
 # PWM <br>
