@@ -163,7 +163,7 @@ void HeatBalanceAlgorithm(void) {
   SumHeatProduced += HeatProduced * HC_Interval / 1000; // sum of total heat produced during the workout, units in kJ/m2
   SumEnergyProduced += MetEnergy * HC_Interval / 1000; // in kJ/m2 --> individualized
 
-  // Solve Full Heat Balance equation with Power HeatProduced (H) AND HeatStored (S) to find air velocity !
+  // Solve Full Heat Balance equation with HeatProduced (H) AND HeatStored (S) to find air velocity !
   // Heat Balance equation:
   // StoredHeat represents the stored internal heat (S) that is to be removed together with the produced heat (H),
   // the sum of both (!) is the heat we want to exchange with the environment...
@@ -192,7 +192,7 @@ void HeatBalanceAlgorithm(void) {
     ActualUpperFanPerc = constrain(ActualUpperFanPerc, 0, 100);
     AdjustForFanBalance();
     SetFanThresholds();
-    SetBothFanPeriods(); // Translate Perc to Millis Duty cycle Fan operation
+    SetBothFanPeriods(); // Translate Perc to Microseconds Duty cycle Fan operation
   }
 }
 ```
