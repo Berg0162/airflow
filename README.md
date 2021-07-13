@@ -7,12 +7,12 @@ The <b>AIRFLOW</b> is a smart device that accurately generates the ideal airflow
 The <b>AIRFLOW</b> smart device continuously tunes the requested airflow velocity for a stable Heat Balance during all phases of an indoor cycling workout, warm-up, intensity intervals, intermittent recovery and at cooldown. The cyclist has no on-the-way interference and can fully concentrate on the demands of the stationay trainer workout, always facing the ideal airstream that will cool him/her appropriately. <br>
 
 # What is needed to determine the critical variables of the Heat Balance Equation <br>
-* Heart Rate Monitor (Dual ANT+ and) Bluetooth LE transmitter <br>
+* Heart Rate Monitor (Dual ANT+ and) Bluetooth LE transmitter 
 <img src="../main/images/heart_rate_monitor.jpg" width="200" height="150" ALIGN="right" alt="Heart rate monitor" > 
 The AIRFLOW device needs continuous measurement of the heart rate to determine the critical mean body temperature which is proportional to the netto heat that is stored in the body. Most cyclists are used to wear a heart rate band during a workout and when that band is transmitting data over BLE it will be suitable for the AIRFLOW device. Notice that many of the (older) devices allow only <b>one</b> BLE connection at the time, which means that you cannot concurrently connect your cyling computer and Zwift computer and/or AIRFLOW device over BLE with the heart rate band... If possible: Use ANT+ for regular connections and only BLE for the AIRFLOW device!<br clear="left">
 
-* A Power meter with (Dual ANT+ and) Bluetooth LE transmitter<br>
-<img src="../main/images/power_meters.png" width="200" height="150" ALIGN="right" alt="Power meters" > 
+* A Power meter with (Dual ANT+ and) Bluetooth LE transmitter
+<img src="../main/images/power_meters.png" width="250" height="200" ALIGN="right" alt="Power meters" > 
 The AIRFLOW device needs continuous measurement of the critical cycling power, produced during a workout, to determine how much energy the body is generating.
 The Power meter of your smart indoor trainer can supply the power measurements that you push during a workout. Or a dedicated power meter mounted on the bike at the crank, pedals or rear hub as long as it is capable of transmitting power data over Bluetooth Low Energy (BLE). Notice that many of the (older) devices allow only <b>one</b> BLE connection at the time, which means that you cannot concurrently connect your cyling computer and Zwift computer and/or AIRFLOW device over BLE with the power meter... If possible: Use ANT+ for regular connections and only BLE for the AIRFLOW device!<br clear="left">
 
