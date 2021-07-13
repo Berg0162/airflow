@@ -6,6 +6,7 @@ The <b>AIRFLOW</b> is a smart device that accurately generates the ideal airflow
 <img src="../main/images/AIRFLOW_equation.png" width="500" height="140" align = "right" alt="Airflow equation">
 The Heat Balance Equation can be rewritten in such a way that the requested Airflow Velocity (<b>Va</b>) is a function of the other terms and can be calculated at any time!
 The <b>AIRFLOW</b> smart device continuously tunes accordingly the requested airflow velocity of the fan(s) for a stable Heat Balance during all phases of an indoor cycling workout, warm-up, intensity intervals, intermittent recovery and at cooldown. The cyclist has no on-the-way interference and can fully concentrate on the demands of the stationay trainer workout, always facing the ideal airstream that will cool him/her appropriately. <br clear="left">
+<img src="../main/images/AIRFLOW_equation.png" width="500" height="140" align = "left" alt="Airflow equation"> <br clear="right">
 
 # What is needed to determine the critical variables of the Heat Balance Equation <br>
 
