@@ -205,3 +205,6 @@ I have little experience with App development and decided to build one (for Andr
 + Get started and upload the AIRFLOW Companion App code. Since some time <b>MIT App Inventor</b> also supports the Apple platform, I have not tested the code for IOS use!
 + Or upload the AIRFLOW Companion App <b>APK</b> to your Android device directly and install the APK. Android will call this a security vulnerability!
 
+# Critical Power on the fly
+
+[See ](https://github.com/Berg0162/RT-Critical-Power)
