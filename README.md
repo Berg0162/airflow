@@ -206,5 +206,5 @@ I have little experience with App development and decided to build one (for Andr
 + Or upload the AIRFLOW Companion App <b>APK</b> to your Android device directly and install the APK. Android will call this a security vulnerability!
 
 # Critical Power on the fly
-
-[See ](https://github.com/Berg0162/RT-Critical-Power)
+In addition the <b>AIRFLOW</b> user gets (as a bonus) insight in the development of his/her <b>Critical Power</b> when training intensity is intense and long enough! The applied <b>Arduino nRF52480 Express</b> CPU is so powerfull that Real Time calculation of <b>CP</b> and <b>W Prime</b> can be accomplished aside all the calculations for determining the Heat Balance terms and setting the fans to the appropriate blowing capacity. Setting or changing your starting CP and W Prime values is an integral part of the AIRFLOW Companion app! 
+[See for the science and math behind this ](https://github.com/Berg0162/RT-Critical-Power)
