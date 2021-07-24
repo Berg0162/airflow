@@ -197,7 +197,7 @@ void HeatBalanceAlgorithm(void) {
 }
 ```
 # OLED 128x64 Presentation Sequence
-During operation a sequence of informative screens are shown on the Blue Oled display that detail the measured or calculated critical values that determine the Heat Balance Equation. On the top bar icons are shown that represent the status of BLE connections (Heart Rate Monitor, Power Meter, Smart Phone) and the double chevron indicates whether you gain or loose internal heat. Every 10 seconds the content of a new screen is shown. The user can switch screens to be shown in the sequence <b>on/off</b>, in accordance with his/her preference and at any time with the help of the Airflow Companion App (<b>Display Settings</b>). <br>
+During operation a sequence of informative screens are shown on the Blue Oled display that detail the measured or calculated critical values that determine the Heat Balance Equation. On the top bar icons are shown that indicate the (BLE or I2C) connection status of: Heart Rate Monitor, Power Meter, Smart Phone, Humidity and Temperature. The double chevron to the left indicates whether you gain or loose internal heat during the workout! Every 10 seconds the content of a new screen is shown. The user can switch screens to be shown in the sequence <b>on/off</b>, in accordance with his/her preference and at any time with the help of the Airflow Companion App (<b>Display Settings</b>). <br>
 <img src="../main/images/OLED_Scr_1.jpg" width="400" height="400" ALIGN="left" alt="Oled scr collage 1" >
 <img src="../main/images/OLED_Scr_2.jpg" width="400" height="400" ALIGN="right" alt="Oled scr collage 2" >
 <br clear="left">
