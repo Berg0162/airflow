@@ -199,6 +199,7 @@ void HeatBalanceAlgorithm(void) {
 # Bike Position
 <img src="../main/images/Bike_Positions.png" width="668" height="214" ALIGN="right" alt="Bike position" >
 The frontal area of a cyclist meets most of the airflow that the fan(s) generate and that area is dependent on the bike position. In the algorithm the bike position is taken into account when calculating the ideal airflow for exchanging heat with the environment. The user can set/change the preferred position at any time with the help of the Airflow Companion App (<b>Algorithmic Settings</b>).<br clear="right">
+<br>
 ```C++
 // Variables that account for BIKE POSITION
 #define UP   (0U) // Upright Bike Position
