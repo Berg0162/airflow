@@ -198,8 +198,8 @@ void HeatBalanceAlgorithm(void) {
 ```
 # OLED 128x64 Presentation Sequence
 During operation a sequence of informative screens are shown on the Blue Oled display that detail the measured or calculated critical values that determine the Heat Balance Equation. Every 10 seconds the content of a new screen is shown. The user can switch screens to be shown in the sequence on/off, in accordance with his/her preference and with the help of the Airflow Companion App.
-<img src="../main/images/OLED_Scr_1.jpg" width="800" height="800" ALIGN="middle" alt="Oled scr collage 1" > <br>
-<img src="../main/images/OLED_Scr_2.jpg" width="800" height="800" ALIGN="middle" alt="Oled scr collage 2" > <br>
+<img src="../main/images/OLED_Scr_1.jpg" width="400" height="400" ALIGN="middle" alt="Oled scr collage 1" > <br>
+<img src="../main/images/OLED_Scr_2.jpg" width="400" height="400" ALIGN="middle" alt="Oled scr collage 2" > <br>
 # Airflow Companion App <br>
 <img src="../main/images/AIRFLOW_app.jpg" width="800" height="800" ALIGN="middle" alt="Companion app" > <br>
 From the start of the project it was decided to develop an AIRFLOW Companion App that would allow changing settings and if all went wrong to allow a strict manual control of the fans.
