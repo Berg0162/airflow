@@ -198,6 +198,14 @@ void HeatBalanceAlgorithm(void) {
 ```
 # Bike Position
 The frontal area of a cyclist meets most of the airflow that the fan(s) generate and that area is dependent on the bike position. In the algorithm the bike position is taken into account when calculating the ideal airflow for exchanging heat with the environment. The user can set/change the preferred position at any time with the help of the Airflow Companion App (<b>Algorithmic Settings</b>).
+```C++
+// Variables that account for BIKE POSITION
+#define UP   (0U) // Upright Bike Position
+#define DP   (1U) // Dropped Bike Position (straight arms!)
+#define TTP  (2U) // Time-Trial Bike Position
+const char* BikePos_str[] = { "UP", "DP", "TTP" };
+uint16_t BikePos = UP; // Default set to UP
+```
 <img src="../main/images/Bike_Positions.png" width="668" height="214" ALIGN="middle" alt="Bike position" >
 # OLED 128x64 Presentation Sequence
 At start-up (power on) the user is informed about the BLE connection process of the <b>AIRFLOW</b> device with Heart Rate Monitor, Power Meter and Smart Phone.
