@@ -206,7 +206,8 @@ The frontal area of a cyclist meets most of the airflow that the fan(s) generate
 const char* BikePos_str[] = { "UP", "DP", "TTP" };
 uint16_t BikePos = UP; // Default set to UP
 ```
-<img src="../main/images/Bike_Positions.png" width="668" height="214" ALIGN="middle" alt="Bike position" >
+<img src="../main/images/Bike_Positions.png" width="668" height="214" ALIGN="right" alt="Bike position" >
+<br clear="right">
 # OLED 128x64 Presentation Sequence
 At start-up (power on) the user is informed about the BLE connection process of the <b>AIRFLOW</b> device with Heart Rate Monitor, Power Meter and Smart Phone.
 On the top bar icons are shown that indicate the (BLE or I2C) connection status of: Heart Rate Monitor, Power Meter, Smart Phone, Humidity and Temperature. During operation a sequence of informative screens are shown on the Blue Oled display that detail the measured or calculated critical values that determine the Heat Balance Equation. On the top bar the double chevron to the left always indicates whether you gain or loose internal heat during the workout! Every 10 seconds the content of a new screen is shown. The user can switch screens to be shown in the sequence <b>on/off</b>, in accordance with his/her preference and at any time with the help of the Airflow Companion App (<b>Display Settings</b>). <br>
