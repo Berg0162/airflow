@@ -197,7 +197,7 @@ void HeatBalanceAlgorithm(void) {
 }
 ```
 # OLED 128x64 Presentation Sequence
-During operation a sequence of informative screens are shown on the Blue Oled display that detail the measured or calculated critical values that determine the Heat Balance Equation. Every 10 seconds the content of a new screen is shown. The user can switch screens to be shown in the sequence on/off, in accordance with his/her preference and with the help of the Airflow Companion App (<b>Display Settings</b>).
+During operation a sequence of informative screens are shown on the Blue Oled display that detail the measured or calculated critical values that determine the Heat Balance Equation. Every 10 seconds the content of a new screen is shown. The user can switch at any time screens to be shown in the sequence <b>on/off</b>, in accordance with his/her preference and with the help of the Airflow Companion App (<b>Display Settings</b>).
 <img src="../main/images/OLED_Scr_1.jpg" width="400" height="400" ALIGN="left" alt="Oled scr collage 1" > <br>
 <img src="../main/images/OLED_Scr_2.jpg" width="400" height="400" ALIGN="right" alt="Oled scr collage 2" > <br>
 <br clear="left">
