@@ -197,8 +197,8 @@ void HeatBalanceAlgorithm(void) {
 }
 ```
 # Bike Position
-The frontal area of a cyclist is dependent on the bike position. In the algorithm the bike position is taken into account, and the user can change the preferred position att any time with the help with the help of the Airflow Companion App (<b>Display Settings</b>).
-<img src="../main/images/Bike_Positions.png" width="400" height="200" ALIGN="middle" alt="Bike position" >
+The frontal area of a cyclist meets most of the airflow that the fan(s) generate and that area is dependent off the bike position. In the algorithm the bike position is taken into account when calculating the ideal airflow for cooling. The user can change the preferred position at any time with the help of the Airflow Companion App (<b>Algorithmic Settings</b>).
+<img src="../main/images/Bike_Positions.png" width="668" height="214" ALIGN="middle" alt="Bike position" >
 
 # OLED 128x64 Presentation Sequence
 At start-up (power on) the user is informed about the BLE connection process of the <b>AIRFLOW</b> device with Heart Rate Monitor, Power Meter and Smart Phone.
