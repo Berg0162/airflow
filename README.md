@@ -196,6 +196,10 @@ void HeatBalanceAlgorithm(void) {
   }
 }
 ```
+# Bike Position
+The frontal area of a cyclist is dependent on the bike position. In the algorithm the bike position is taken into account, and the user can change the preferred position att any time with the help with the help of the Airflow Companion App (<b>Display Settings</b>).
+<img src="../main/images/Bike_Positions.png" width="400" height="200" ALIGN="middle" alt="Bike position" >
+
 # OLED 128x64 Presentation Sequence
 At start-up (power on) the user is informed about the BLE connection process of the <b>AIRFLOW</b> device with Heart Rate Monitor, Power Meter and Smart Phone.
 On the top bar icons are shown that indicate the (BLE or I2C) connection status of: Heart Rate Monitor, Power Meter, Smart Phone, Humidity and Temperature. During operation a sequence of informative screens are shown on the Blue Oled display that detail the measured or calculated critical values that determine the Heat Balance Equation. On the top bar the double chevron to the left always indicates whether you gain or loose internal heat during the workout! Every 10 seconds the content of a new screen is shown. The user can switch screens to be shown in the sequence <b>on/off</b>, in accordance with his/her preference and at any time with the help of the Airflow Companion App (<b>Display Settings</b>). <br>
