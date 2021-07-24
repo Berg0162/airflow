@@ -205,10 +205,36 @@ void HeatBalanceAlgorithm(void) {
 const char* BikePos_str[] = { "UP", "DP", "TTP" };
 uint16_t BikePos = UP; // Default set to UP
 ```
-
 <img src="../main/images/Bike_Positions.png" width="668" height="214" ALIGN="right" alt="Bike position" >
 The frontal area of a cyclist meets most of the airflow that the fan(s) generate and that area is dependent on the bike position. In the algorithm the bike position is taken into account when calculating the ideal airflow for exchanging heat with the environment. The user can set/change the preferred position at any time with the help of the Airflow Companion App (<b>Algorithmic Settings</b>).<br clear="right">
+# Mapping
+```C++
+// Airflow speed of the impellor of the fan is linear proportional to the rotation frequency
+float Vair = 0.0; // Calculated requested AirFlow as a result of the Heat Balance equation
+// According to the First Fan Affinity Law: Volumetric air flow is proportional to RPM (Impellor Rotations Per Minute)
+// --> Higher impellor frequency results in proportional higher air flow speed
+// Just ONE multiplying factor (FUP) is therefore appropriate for the whole range of fan operation!
 
+// --> Measurement with a handheld anemometer showed that the applied fan generates, at max capacity, an airflow velocity of about 30 km/hour !!
+// NOTICE: This is fully dependent of the Fan's mechanical properties, size, power, manufacturer, etcetera and shall be different in your case!
+//
+// The fans are set from 0% - 100% duty cycle (no flow - max flow). To map the fan percentage to the requested Heat Balanced Airflow follow this rule:
+// At a certain set of situational values (RH, air temperature, Gross Efficiency, cyling power induced, etcetera) the heat balance equation results in 
+// a requested Airflow of 8.32 m/s (3.6 * 8.32 = 30 km/h) and this should equal the very same Fan Airflow velocity, in our case at max fan capacity (100%).
+//
+// ---> When a requested airflow of 8.32 m/s is reached the fan(s) should operate close to 100% capacity --> therefore FUP should be 100/8.32 = 12 !!
+// (FUP * Requested Airflow) == (12 (No Dimension) * 8.32 (m/s)) = 100% of the max Fan capacity (resulting in 30 km/h air velocity)
+const float FUP = 12.0;  // The (constant) multiplying factor
+// The AirFlowToFanPercFactor Conversion Factor can be derived taking into account the compensation for smaller sized frontal areas of the rider in
+// the different bike positions with their appropriately increased factors!
+const float AirFlowToFanPercFactor[] = {FUP,        // Upright Bike Position
+                                       (FUP + 0.4), // Dropped Bike Position (straight arms!)
+                                       (FUP + 0.8)};// Time-Trial Bike Position
+#define MPS (1U) // Show Vair in meters per second m/s
+#define KPH (2U) // Show Vair in kilometers per hour km/h
+#define MPH (3U) // Show Vair in Miles per hour mph
+const uint8_t AirSpeedUnit = KPH;
+```
 # OLED 128x64 Presentation Sequence
 At start-up (power on) the user is informed about the BLE connection process of the <b>AIRFLOW</b> device with Heart Rate Monitor, Power Meter and Smart Phone.
 On the top bar icons are shown that indicate the (BLE or I2C) connection status of: Heart Rate Monitor, Power Meter, Smart Phone, Humidity and Temperature. During operation a sequence of informative screens are shown on the Blue Oled display that detail the measured or calculated critical values that determine the Heat Balance Equation. On the top bar the double chevron to the left always indicates whether you gain or loose internal heat during the workout! Every 10 seconds the content of a new screen is shown. The user can switch screens to be shown in the sequence <b>on/off</b>, in accordance with his/her preference and at any time with the help of the Airflow Companion App (<b>Display Settings</b>). <br>
