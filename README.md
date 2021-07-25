@@ -209,21 +209,20 @@ uint16_t BikePos = UP; // Default set to UP
 The frontal area of a cyclist meets most of the airflow that the fan(s) generate and that area is dependent on the bike position. In the algorithm the bike position is taken into account when calculating the ideal airflow for exchanging heat with the environment. The user can set/change the preferred position at any time with the help of the Airflow Companion App (<b>Algorithmic Settings</b>).<br clear="right">
 
 # Matching V<sub>air</sub> and Fan Capacity<br>
-```C++
-// Airflow speed of the impellor of the fan is linear proportional to the rotation frequency
-float Vair = 0.0; // Calculated requested AirFlow as a result of the Heat Balance equation
-// According to the First Fan Affinity Law: Volumetric air flow is proportional to RPM (Impellor Rotations Per Minute)
-// --> Higher impellor frequency results in proportional higher air flow speed
-// Just ONE multiplying factor (FUP) is therefore appropriate for the whole range of fan operation!
+Airflow speed of the impellor of the fan is linear proportional to the rotation frequency. According to the First Fan Affinity Law: Volumetric air flow is proportional to RPM (Impellor Rotations Per Minute). <br>
+--> Higher impellor frequency results in proportional higher air flow speed
+Just ONE multiplying factor (FUP) is therefore appropriate for the whole range of fan operation!
 
-// --> Measurement with a handheld anemometer showed that the applied fan generates, at max capacity, an airflow velocity of about 30 km/hour !!
-// NOTICE: This is fully dependent of the Fan's mechanical properties, size, power, manufacturer, etcetera and shall be different in your case!
-//
-// The fans are set from 0% - 100% duty cycle (no flow - max flow). To map the fan percentage to the requested Heat Balanced Airflow follow this rule:
-// At a certain set of situational values (RH, air temperature, Gross Efficiency, cyling power induced, etcetera) the heat balance equation results in 
-// a requested Airflow of 8.32 m/s (3.6 * 8.32 = 30 km/h) and this should equal the very same Fan Airflow velocity, in our case at max fan capacity (100%).
-//
-// ---> When a requested airflow of 8.32 m/s is reached the fan(s) should operate close to 100% capacity --> therefore FUP should be 100/8.32 = 12 !!
+--> Measurement with a handheld anemometer showed that the applied fan generates, at max capacity, an airflow velocity of about 30 km/hour !!
+NOTICE: This is fully dependent of the Fan's mechanical properties, size, power, manufacturer, etcetera and shall be different in your case!
+
+The fans are set from 0% - 100% duty cycle (no flow - max flow). To map the fan percentage to the requested Heat Balanced Airflow follow this rule:
+At a certain set of situational values (RH, air temperature, Gross Efficiency, cyling power induced, etcetera) the heat balance equation results in 
+a requested Airflow of 8.32 m/s (3.6 * 8.32 = 30 km/h) and this should equal the very same Fan Airflow velocity, in our case at max fan capacity (100%).
+--> When a requested airflow speed of 8.32 m/s is reached the fan(s) should operate close to 100% capacity --> therefore the multiplying factor (<b>FUP</b>) should be 100/8.32 = 12 !!
+
+```C++
+float Vair = 0.0; // Calculated requested AirFlow as a result of the Heat Balance equation
 // (FUP * Requested Airflow) == (12 (No Dimension) * 8.32 (m/s)) = 100% of the max Fan capacity (resulting in 30 km/h air velocity)
 const float FUP = 12.0;  // The (constant) multiplying factor
 // The AirFlowToFanPercFactor Conversion Factor can be derived taking into account the compensation for smaller sized frontal areas of the rider in
