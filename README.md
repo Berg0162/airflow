@@ -210,16 +210,16 @@ The frontal area of a cyclist meets most of the airflow that the fan(s) generate
 
 # Matching V<sub>air</sub> and Fan Capacity<br>
 Airflow speed of the impellor of the fan is linear proportional to the rotation frequency. According to the First Fan Affinity Law: Volumetric air flow is proportional to RPM (Impellor Rotations Per Minute). <br>
---> Higher impellor frequency results in proportional higher air flow speed
+* Higher impellor frequency results in proportional higher air flow speed
 Just ONE multiplying factor (FUP) is therefore appropriate for the whole range of fan operation!
 
---> Measurement with a handheld anemometer showed that the applied fan generates, at max capacity, an airflow velocity of about 30 km/hour !!
-NOTICE: This is fully dependent of the Fan's mechanical properties, size, power, manufacturer, etcetera and shall be different in your case!
+* Measurement with a handheld anemometer showed that the applied fan generates, at max capacity, an airflow velocity of about 30 km/hour!
+NOTICE: This is fully dependent of the Fan's mechanical properties, size, power, manufacturer, etcetera and most likely shall be different in your case!
 
 The fans are set from 0% - 100% duty cycle (no flow - max flow). To map the fan percentage to the requested Heat Balanced Airflow follow this rule:
 At a certain set of situational values (RH, air temperature, Gross Efficiency, cyling power induced, etcetera) the heat balance equation results in 
 a requested Airflow of 8.32 m/s (3.6 * 8.32 = 30 km/h) and this should equal the very same Fan Airflow velocity, in our case at max fan capacity (100%).
---> When a requested airflow speed of 8.32 m/s is reached the fan(s) should operate close to 100% capacity --> therefore the multiplying factor (<b>FUP</b>) should be 100/8.32 = 12 !!
+* When a requested airflow speed of 8.32 m/s is reached the fan(s) should operate close to 100% capacity --> therefore the multiplying factor (<b>FUP</b>) should be 100/8.32 = 12 !!
 
 ```C++
 float Vair = 0.0; // Calculated requested AirFlow as a result of the Heat Balance equation
