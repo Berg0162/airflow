@@ -1,5 +1,5 @@
 /*******************************************************************************
-  This is an application for the Adafruit Feather nRF52 (Bluefruit Bluetooth LE)
+  This is an application for the Adafruit Feather nRF52840 Express (Bluefruit BLE)
   --> Nordic Semiconductor SoftDevice installed: S140
  *******************************************************************************/
 
@@ -7,19 +7,19 @@
     Bluefruit library to implement a custom client (a.k.a. CENTRAL) that is used to listen
     and talk with a Gatt server on the indoor cycling trainer or power meter. In our case a
     TACX Indoor Bike Trainer of type NEO... a so called "smart trainer" that is capable
-    of working with BLE and ANT+.
+    of working with BLE and ANT+. Or a Quarq Dfour Zero Spider power meter working with BLE and ANT+.
 
-    In addition a HRM sensor strap that is capable of BLE communication with the Airflow
+    In addition a HRM sensor strap that is capable of BLE and ANT+ communication with the Adafruit Feather nRF52840.
 
-    Optional (but extremely usefull) is  a mobile phone can be (optionally) connected over BLE UART,
+    Optional (but extremely usefull) is  a mobile phone that can be (optionally) connected over BLE UART,
     (a) to set critical and persistent values that constrain high level functions,
-    (b) to manually control air flow rate if one does not allow the algorithms to do the work
+    (b) to manually control air flow capacity if one does not allow the algorithm(s) to do the work
     In analogy to Zwift you need to download and install the AIRFLOW Companion App on your phone!
 
     Note: you need a TACX Trainer or Power meter (BLE capable), a HRM strap and Mobile Phone to exploit
     this sketch to its max.
     Stand alone (i.e. with no BLE connectable peripherals aside from a mobile phone) the sketch tests well
-    functioning and can set "manually" the fans.....
+    functioning and can set "manually" the fans capacity.....
 */
 
 #include <bluefruit.h>
@@ -66,7 +66,7 @@ uint16_t w_prime_usr = 7500;          // Your (estimate of) W-prime or a base va
 uint16_t ew_prime_mod = w_prime_usr;  // First order estimate of W-prime modified during intense workout
 uint16_t ew_prime_test = w_prime_usr;   // 20-min-test algorithmic estimate (20 minute @ 5% above eCP) of W-prime for a given eCP! 
 long int w_prime_balance = 0;  // Can be negative !!!
-bool IsShowWprimeValuesDominant = false;
+bool IsShowWprimeValuesDominant = false; // We want to see the W Prime depletion constantly when cycling above CP!
 //-------------------------------------------------------
 
 #define SIXTY_SECONDS_TIME 60000 // Time span in millis -> one minute
@@ -76,7 +76,6 @@ unsigned long OneMinuteInterval = 0; //
 unsigned long TimeCaptureMillis = 0;  // Soon to be instantiated
 // Instantiate timing for Power calculation interval
 #define SOME_SECONDS_TIME 5000 // Time span in millis -> 5 seconds
-unsigned long SomeSecondsInterval = 0; // POWER Algorithm calculation interval
 
 // Create a SoftwareTimer that will drive our OLED display sequence.
 SoftwareTimer RoundRobin; // Timer for OLED display show time
@@ -223,7 +222,7 @@ char HRMdeviceName[32 + 1] = {0};
 const char* HRMSensorLoc_str[] = { "Other", "Chest", "Wrist", "Finger", "Hand", "Ear Lobe", "Foot" };
 // ------------------------------------------------------
 
-// Core Temperature and heat algorithm(s) Global variables --------
+// Core Temperature and heat balance algorithm(s) Global variables --------
 const double Tcore_start = 37.0; // Starting core body temperature
 double Tcore_cur = (Tcore_start - 0.005); // EstimateTc result Variable, set 0.005 Celsius below start value
 double v_cur = 0.0;  // EstimateTc result Variable
@@ -317,7 +316,6 @@ void ShowRad_ConvValuesOnOled(void);
 void ShowAirTemp_HumidityValuesOnOled(void);
 void ShowPwr_HbmValuesOnOled(void);
 void ShowWorkValueOnOled(void);
-//void ShowWprimeValuesOnOled(uint8_t Mode);
 void ShowWprimeValuesOnOled(void);
 void ShowSettingsOnOled(void);
 
@@ -417,7 +415,7 @@ void setup()
     display.display(); // Acknowledge Adafruit rights, license and efforts
     delay(500); // show some time
   }
-  // Ready to show our own SIMCLINE splash screen
+  // Ready to show our own AIRFLOW splash screen
   display.clearDisplay(); // clean the oled screen
   display.setTextColor(SSD1306_WHITE);
   display.drawBitmap(24, 0, Air_Flow_bw_80_64, 80, 64, 1);
@@ -435,7 +433,7 @@ void setup()
   digitalWrite(PWM_PIN_L_FAN, LOW); // Start at OFF state = LOW
 
   //---------------------------------------------------------------------------------------------
-  //Enable and setup connections over BLE, first with Tacx Neo and then try to connect smartphone
+  //Enable and setup connections over BLE, first with CPS, HRM and then try to connect smartphone
   //---------------------------------------------------------------------------------------------
 #ifdef DEBUGAIR
   Serial.println(F("Bluefruit-nRF52 Central Airflow v 0.0"));
@@ -583,9 +581,7 @@ void setup()
   // Set up a repeating softwaretimer that fires every SCHEDULED_TIME seconds to invoke the OLED Time Sharing schedular
   RoundRobin.begin(SCHEDULED_TIME, DisplaySchedular_callback);
   RoundRobin.start();
-
   OneMinuteInterval   = millis() + SIXTY_SECONDS_TIME; // Set first Delay Heat Balance Algoritm calculation
-  SomeSecondsInterval = millis() + SOME_SECONDS_TIME; // Set first Delay POWER Algorithm calculation
 
   // This will just show up......during first phase of data collection
   ShowOnOledLarge("", "Ready!", 0); // No delay
@@ -1347,13 +1343,6 @@ void CallOledDisplaySchedular(void) {
         break;
       }
     case 10 : { // DO NOT CHANGE this scheduled position nr# 10 see TAWC_Mode and appropriate DisplaySettings[10]
-      /*
-        if (TimeProgressed < TimeSpan) {
-        ShowWprimeValuesOnOled(0);
-        } else {
-        ShowWprimeValuesOnOled(1);  
-        }
-      */
       ShowWprimeValuesOnOled();
         break;
       }
@@ -1767,93 +1756,6 @@ void ShowTbody_TskinValuesOnOled(void) {
   display.display();
 }// -----------------------------------
 
-/* Funtion to show W-Prime data on Oled screen
-void ShowWprimeValuesOnOled(uint8_t Mode) {
-  char tmp[12];
-  display.clearDisplay();
-  display.setTextColor(SSD1306_WHITE);
-  display.setTextSize(2);
-  if (Mode == 0) {
-    display.setCursor(1, 5); // was 1, 5
-    display.print("eCP");
-    display.setCursor(116, 5); //was 112, 5
-    display.print("W");
-    dtostrf(eCP, 4, 0, tmp); // show sign only if negative
-    display.setCursor(26, 1); // was 42, 1
-    display.setTextSize(3);
-    display.print(tmp);
-  } else {
-    display.setCursor(1, 5); // was 1, 48
-    display.print("W");
-    display.setTextSize(1);
-    display.print("'");
-    display.setTextSize(2);
-    display.setCursor(104, 5); // was 112, 48
-    display.print("kJ");
-    if (ew_prime < 10000) { // Personal setting
-      dtostrf((double)ew_prime / 1000, 4, 2, tmp); // show sign only if negative
-    } else dtostrf((double)ew_prime / 1000, 4, 1, tmp); // show sign only if negative
-    display.setCursor(26, 1); // was 42, 1
-    display.setTextSize(3);
-    display.print(tmp);
-  }
-  display.setTextSize(2);
-  display.setCursor(104, (HLINE2+6)); // was 112, 48
-  display.print("kJ");
-  uint16_t X0 = 1, Y0 = 27, W = 127, H = 10;
-  double Tscale = ( ((double)w_prime_balance / (double)ew_prime) * 127);
-  uint16_t Fw = uint16_t(Tscale); // Type cast to get rid of decimals
-  display.drawRect( X0, Y0, W, H, SSD1306_WHITE);
-  display.fillRect( X0, (Y0 + 2), Fw, (H - 4), SSD1306_WHITE);
-  if (ew_prime < 10000) { // Personal setting
-      dtostrf((double)w_prime_balance / 1000, 4, 2, tmp); // show sign only if negative
-    } else dtostrf((double)w_prime_balance / 1000, 4, 1, tmp); // show sign only if negative
-  display.setCursor(26, HLINE2);
-  display.setTextSize(3);
-  display.print(tmp);
-  display.display();
-}// -----------------------------------
-
-
-// Funtion to show W-Prime data on Oled screen
-void ShowWprimeValuesOnOled(void) {
-  char tmp[12];
-  display.clearDisplay();
-  display.setTextColor(SSD1306_WHITE);
-  display.setTextSize(2);
-  display.setCursor(1, 5); // was 1, 5
-  display.print("CP");
-  display.setCursor(1, 48); // was 1, 48
-  display.print("W");
-  display.setTextSize(1);
-  display.print("'");
-  display.setTextSize(2);
-  display.setCursor(116, 5); //was 112, 5
-  display.print("W");
-  display.setCursor(104, 48); // was 112, 48
-  display.print("kJ");
-  dtostrf(eCP, 4, 0, tmp); // show sign only if negative
-  display.setCursor(26, 1); // was 26, 1
-  display.setTextSize(3);
-  display.print(tmp);
-  uint16_t X0 = 1, Y0 = 27, W = 127, H = 10;
-  // code accounts for complex manipulations of eW-Prime during continued depletion
-  double w_prime_balance_alt = ((double)ew_prime_mod-(double)w_prime_usr ) + (double)w_prime_balance; 
-  double Tscale = ((w_prime_balance_alt/(double)ew_prime_mod) * 127);
-  // ---------------------------------------------------------------------------- 
-  uint16_t Fw = (uint16_t)Tscale; // Type cast to get rid of decimals
-  display.drawRect( X0, Y0, W, H, SSD1306_WHITE);
-  display.fillRect( X0, (Y0 + 2), Fw, (H - 4), SSD1306_WHITE);
-  if (ew_prime_test < 10000) { // Personal setting
-    dtostrf((double)ew_prime_test / 1000, 4, 2, tmp); // show sign only if negative
-  } else dtostrf((double)ew_prime_test / 1000, 4, 1, tmp); // show sign only if negative
-  display.setCursor(26, HLINE2); // was 26
-  display.setTextSize(3);
-  display.print(tmp);
-  display.display();
-}// -----------------------------------
-*/
-
 // Funtion to show W-Prime data on Oled screen
 void ShowWprimeValuesOnOled(void) {
   char tmp[12];
@@ -2030,16 +1932,12 @@ void disconnect_callback(uint16_t conn_handle, uint8_t reason) {
 float EstimateSkinTemp(float AirTemp, float PresAir, float AirVelo, float Met, float CoreTemp) {
   // Mehnert P. et al., 2000    --> Notice that these equations are valid in relative steady state situations....
   // Tradiant == Tair !!
-  // Tskin =  7.19 + 0.064*Tair + 0.061Tradiant + 0.198*Pair - 0.348*Vair + 0.616*Tcore // Nude subjects
   // Tskin = 12.17 + 0.020*Tair + 0.044Tradiant + 0.194*Pair - 0.253*Vair + 0.0029*Met + 0.513*Tcore // clothed subjects
-
-  //return (7.19 + 0.125*AirTemp + 0.198*PresAir - 0.348*AirVelo + 0.616*CoreTemp); // Nude
-
+  
   // FILTER/SMOOTH: To avoid that (sprint generated) bursts in MetEnergy will cause spikes in Tskin
   float Met_Filtered = (float)EMA_MetEnergyFilter( int(Met + 0.5) );
-  return (12.17 + 0.064 * AirTemp + 0.194 * PresAir - 0.253 * AirVelo + 0.0029 * Met_Filtered + 0.513 * CoreTemp); // Clothed
+  return (12.17 + 0.064 * AirTemp + 0.194 * PresAir - 0.253 * AirVelo + 0.0029 * Met_Filtered + 0.513 * CoreTemp);
 }
-
 
 double PercentageofChange(double Initial, double Final)
 {
@@ -2169,7 +2067,7 @@ void HeatBalanceAlgorithm(void) {
 
   // Determine now the Mean Body Temperature from estimated Core Temperature and mean estimated Skin temperature
   // Burton, 1935 (64*36) and Kerslake, 1972 (67*33)
-  //Tbody_cur = float( (float)0.64*Tcore_cur + 0.36*Tskin ); // equation according to Burton, 1935 (confirmed in other papers)
+  //Tbody_cur = float( (float)0.64*Tcore_cur + 0.36*Tskin ); // equation according to Burton, 1935 
   Tbody_cur = (float)0.67 * Tcore_cur + 0.33 * Tskin; // equation according to Kerslake, 1972 (confirmed in other papers)
 
   // Calculate how much heat has been produced since previous round
@@ -2410,79 +2308,6 @@ void w_prime_balance_waterworth(uint16_t iPower, uint16_t iCP, uint16_t iw_prime
     }
     //-----------------extra -------------------------------------------------------------------------------
 } // end
-
-/* 19 mei 2021
-void w_prime_balance_waterworth(uint16_t iPower, uint16_t iCP, uint16_t iw_prime) {
-    // Most power meters measure power, torque a.o. in a high frequency (20-60 Hz) but 
-    // transmit (BLE) datasets to a monitoring device only about 1 per second.
-    // Quarq Dfour Zero Spider power meter sends between 2 and 1.0 power readings per second dependent of POWER level !!!
-    int power_above_cp = 0;
-    static double T_lim = 0; // Time spent during power_above_cp
-    double w_prime_expended = 0.0;
-    double ExpTerm1 = 0.0, ExpTerm2 = 0.0;
-    static double running_sum = 0.0;
-    static unsigned long int CountPowerAboveCP = 0; // Count the power readings above CP 
-    static uint16_t avPower = 0; // Average power above CP
-    const long int NextLevelStep = 1000; // Stepsize of the next level of w-prime modification --> 1000 Joules
-    static long int NextUpdateLevel = 0; // The next level at which to update eCP, e_w_prime_mod and ew_prime_test
-    
-    double tau = tau_w_prime_balance(iPower, iCP); // Determine the value for tau
-    
-    // Accurately calculate sample time in seconds and count power readings
-    // sampling rate is the number of samples per second and equals 1/sample_time ! 
-    static unsigned long PrevReadingTime = 0;
-    double Sample_Time = double(millis()-PrevReadingTime)/1000; // millis to seconds
-    PrevReadingTime = millis();
-    static unsigned long NumOfPowerReadings = 0;
-    NumOfPowerReadings++;
-    power_above_cp = (iPower - iCP);
-#ifdef DEBUGAIR
-    Serial.printf("CNT:%4d ST: %5.3f tau: %f ", NumOfPowerReadings, Sample_Time, tau);
-#endif
-    // w_prime is energy (unit in Joules) so we need to detemine Watts * seconds to get Energy!
-    // Determine the spent energy (above CP) since the last measurement (--> during sample time)
-    w_prime_expended = double(max(0, power_above_cp))/Sample_Time;  // replaced *sampling_rate with /Sample_Time in seconds
-    // WorkoutTime is the time spent during the workout in seconds (present-time - start-time) therefore
-    ExpTerm1 = exp(double(NumOfPowerReadings)/tau);  // (WorkoutTime*sampling_rate) is equivalnet to NumOfPowerReadings
-    ExpTerm2 = exp(-double(NumOfPowerReadings)/tau); // (WorkoutTime*sampling_rate) is equivalnet to NumOfPowerReadings
-#ifdef DEBUGAIR
-    Serial.printf("W prime expended: %3.0f exp-term1: %f exp-term2: %f ", w_prime_expended , ExpTerm1, ExpTerm2);
-#endif
-    running_sum = running_sum + (w_prime_expended*ExpTerm1); //
-#ifdef DEBUGAIR
-    Serial.printf("Running Sum: %f ", running_sum);
-#endif    
-    w_prime_balance = (long int)( (double)iw_prime - (running_sum*ExpTerm2) ) ; // cast from double to int
-#ifdef DEBUGAIR
-    Serial.printf(" w_prime_balance: %d ", w_prime_balance);
-#endif
-    //--------------- extra --------------------------------------------------------------------------------------
-    // Workout starts at a certain W'= ##,### Joules and CP = ### watts, set by the user; the algorithm increases CP and W' stepwise
-    // to more realistic values every time when W'balance is depleted to a certain level; -> 2-Parameter Algorithm updates CP and W'
-    if (power_above_cp > 0) { 
-      CalculateAveragePowerAboveCP(iPower, avPower, CountPowerAboveCP); // Average power > CP is to be calculated for later use
-      T_lim += Sample_Time; // Limit Time is Sum of Sample Time spent above CP, calculated for later use
-    }
-#ifdef DEBUGAIR
-//    Serial.printf(" [%d]\n", CountPowerAboveCP);
-#endif
-    // When working above CP, the moment comes that we need to update eCP and ew_prime !!
-    if ( (w_prime_balance < NextUpdateLevel) && (w_prime_expended > 0) ) { // W' balance is further depleted --> test for an update moment
-       NextUpdateLevel -= NextLevelStep; // Move down another level of depletion, update eCP, ew_prime_mod and ew_prime_test
-#ifdef DEBUGAIR
-//       UpdateCNT++; // Count number of eCP updates FOR TESTING ONLY
-#endif
-       eCP = GetCPfromTwoParameterAlgorithm(avPower, T_lim, iw_prime); // Estimate a new eCP value
-       ew_prime_mod = w_prime_usr - NextUpdateLevel; // Adjust ew_prime_modified to the next level of depletion to be checked
-       ew_prime_test = GetWPrimefromTwoParameterAlgorithm(uint16_t(eCP*1.045), double(1200), eCP); // 20-min-test estimate for W-Prime
-#ifdef DEBUGAIR
-       Serial.printf("Update of eCP - ew_prime %5d - avPower: %3d - T-lim:%6.1f --> eCP: %3d ", ew_prime_mod, avPower, T_lim, eCP);
-       Serial.printf("--> 20-min-test-estimate of W-Prime: %d \n", ew_prime_test );
-#endif
-    }
-    //-----------------extra -------------------------------------------------------------------------------
-} // end
-*/
 
 // Check and Set starting value of w_prime to realistic numbers!!
 void ConstrainW_PrimeValue(uint16_t &iCP, uint16_t &iw_prime) {
