@@ -249,7 +249,6 @@ On the top bar, the double chevron to the left always indicates whether you gain
 <img src="../main/images/OLED_Scr_1.jpg" width="400" height="400" ALIGN="left" alt="Oled scr collage 1" >
 
 <img src="../main/images/OLED_Scr_2.jpg" width="400" height="400" ALIGN="right" alt="Oled scr collage 2" >
-
 <br clear="left">
 
 # Airflow Companion App <br>
