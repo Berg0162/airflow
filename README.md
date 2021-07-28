@@ -261,6 +261,7 @@ I have little experience with App development and decided to build one (for Andr
 + Get started and upload the AIRFLOW Companion App code. Since some time <b>MIT App Inventor</b> also supports the Apple platform, I have not tested the code for IOS use!
 + Or upload the AIRFLOW Companion App <b>APK</b> to your Android device directly and install the APK. Android will call this a security vulnerability!
 <br>
+# Flow
 + At startup the AIRFLOW device starts scanning for appropriate BLE devices in the neighbourhood, first it tries to establish a HRM <b>and</b> Power meter connection! The OLED display shows the progress and details of the running process. Notice that the scanning time for devices is limited!
 + For a limited time it then advertises for a smartphone, having the Airflow Companion App running and actively looking for the Airflow device. 
 + If detected the Airflow Companion App establishes a connection over BLE (with the AIRFLOW device). From that moment the Nordic UART service (a.k.a. BLEUART) for exchange of information is applied. A simple dedicated protocol was implemented that allows for bidirectional exchange of short strings containing diagnostic messages and/or operation settings between smartphone and AIRFLOW device.
