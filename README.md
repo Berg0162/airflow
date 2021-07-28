@@ -232,6 +232,7 @@ const uint8_t AirSpeedUnit = KPH;
 # OLED 128x64 Presentation Sequence
 At start-up (power on) the user is informed about the BLE connection process of the <b>AIRFLOW</b> device with Heart Rate Monitor, Power Meter and Smart Phone.
 On the top bar, icons are shown that indicate the (BLE or I2C) connection status of: Heart Rate Monitor, Power Meter, Smart Phone, Humidity and Temperature. During operation a sequence of (<b>11</b>) informative screens are shown on the Blue Oled display that detail the measured or calculated critical values that determine the Heat Balance Equation.
+
 ```C++
 // Create a SoftwareTimer that will drive our OLED display sequence.
 SoftwareTimer RoundRobin; // Timer for OLED display show time
@@ -242,10 +243,13 @@ int Scheduled = -1; // Counter for current OLED display screen, start to show SE
 char DisplaySettings[MAX_SCHEDULED + 1] = "00000000000"; // MAX_SCHEDULED display screen sequence --> all OFF
 // -------------------------------------------------------
 ```
-<br>
+
 On the top bar, the double chevron to the left always indicates whether you gain (up) or loose (down) internal heat during the workout! Every 10 seconds the content of a new screen in the sequence (of <b>11</b>) is shown. The user can switch screens <b>on/off</b> to be shown in the sequence, in accordance with his/her preference and at any time with the help of the Airflow Companion App (<b>Display Settings</b>). <br>
+
 <img src="../main/images/OLED_Scr_1.jpg" width="400" height="400" ALIGN="left" alt="Oled scr collage 1" >
-<img src="../main/images/OLED_Scr_2.jpg" width="400" height="400" ALIGN="right" alt="Oled scr collage 2" > <br>
+
+<img src="../main/images/OLED_Scr_2.jpg" width="400" height="400" ALIGN="right" alt="Oled scr collage 2" >
+
 <br clear="left">
 
 # Airflow Companion App <br>
