@@ -238,14 +238,13 @@ SoftwareTimer RoundRobin; // Timer for OLED display show time
 #define SCHEDULED_TIME 10000 // Time span to show an OLED Display screen in millis
 int Scheduled = -1; // Counter for current OLED display screen, start to show SETTINGS Oled Display first !!
 #define MAX_SCHEDULED 11 // Number of Oled Display screens to show sequentially -> Settings Screen (-1) does not count!
-
 // Display Settings Sequence Show ("1") NoShow ("0")
 char DisplaySettings[MAX_SCHEDULED + 1] = "00000000000"; // MAX_SCHEDULED display screen sequence --> all OFF
 // -------------------------------------------------------
 ```
 On the top bar, the double chevron to the left always indicates whether you gain (up) or loose (down) internal heat during the workout! Every 10 seconds the content of a new screen in the sequence (of <b>11</b>) is shown. The user can switch screens <b>on/off</b> to be shown in the sequence, in accordance with his/her preference and at any time with the help of the Airflow Companion App (<b>Display Settings</b>). <br>
-<img src="../main/images/OLED_Scr_1.jpg" width="400" height="400" ALIGN="left" alt="Oled scr collage 1" >
-<img src="../main/images/OLED_Scr_2.jpg" width="400" height="400" ALIGN="right" alt="Oled scr collage 2" >
+<img src="../main/images/OLED_Scr_1.jpg" width="400" height="400" ALIGN="left" alt="Oled scr collage 1" > <br>
+<img src="../main/images/OLED_Scr_2.jpg" width="400" height="400" ALIGN="right" alt="Oled scr collage 2" > <br>
 <br clear="left">
 
 # Airflow Companion App <br>
