@@ -244,7 +244,7 @@ char DisplaySettings[MAX_SCHEDULED + 1] = "00000000000"; // MAX_SCHEDULED displa
 ```
 <br>
 On the top bar, the double chevron to the left always indicates whether you gain (up) or loose (down) internal heat during the workout! Every 10 seconds the content of a new screen in the sequence (of <b>11</b>) is shown. The user can switch screens <b>on/off</b> to be shown in the sequence, in accordance with his/her preference and at any time with the help of the Airflow Companion App (<b>Display Settings</b>). <br>
-<img src="../main/images/OLED_Scr_1.jpg" width="400" height="400" ALIGN="left" alt="Oled scr collage 1" > <br>
+<img src="../main/images/OLED_Scr_1.jpg" width="400" height="400" ALIGN="left" alt="Oled scr collage 1" >
 <img src="../main/images/OLED_Scr_2.jpg" width="400" height="400" ALIGN="right" alt="Oled scr collage 2" > <br>
 <br clear="left">
 
