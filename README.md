@@ -259,15 +259,13 @@ I have little experience with App development and decided to build one (for Andr
 + Download the <b>MIT App Inventor</b> AIRFLOW Companion App code with extension *file*<b>.aia</b>
 + [Visit at AppInventor](https://appinventor.mit.edu), You can get started by clicking the orange "Create Apps!" button from any page on the website.
 + Get started and upload the AIRFLOW Companion App code. Since some time <b>MIT App Inventor</b> also supports the Apple platform, I have not tested the code for IOS use!
-+ Or upload the AIRFLOW Companion App <b>APK</b> to your Android device directly and install the APK. Android will call this a security vulnerability!
-<br>
++ Or upload the AIRFLOW Companion App <b>APK</b> to your Android device directly and install the APK. Android will call this a security vulnerability!<br>
 # Flow <br>
 + At startup the AIRFLOW device starts scanning for appropriate BLE devices in the neighbourhood, first it tries to establish a HRM <b>and</b> Power meter connection! The OLED display shows the progress and details of the running process. Notice that the scanning time for devices is limited!
 + For a limited time it then advertises for a smartphone, having the Airflow Companion App running and actively looking for the Airflow device. 
 + If detected the Airflow Companion App establishes a connection over BLE (with the AIRFLOW device). From that moment the Nordic UART service (a.k.a. BLEUART) for exchange of information is applied. A simple dedicated protocol was implemented that allows for bidirectional exchange of short strings containing diagnostic messages and/or operation settings between smartphone and AIRFLOW device.
 + After connection is established, the Airflow device sends the latest (persistent) settings data to allow the App user to assess the current (user set) values.
-+ At any time the App user changes the current settings or control data, the Airflow Companion App sends these to the Airflow device to immediately apply them. 
-<br>
++ At any time the App user changes the current settings or control data, the Airflow Companion App sends these to the Airflow device to immediately apply them. <br>
 # Critical Power on the fly
 <img src="../main/images/CP_W_Prime_Oled.png" width="147" height="147" ALIGN="left" alt="Companion app" >
 In addition to an ideal airflow velocity for an optimally thermoregulated human body, the <b>AIRFLOW</b> user can get (as a bonus) insight in the development of his/her <b>Critical Power</b> when training intensity is intense and long enough! The applied <b>Arduino nRF52480 Express</b> CPU is so powerfull that Real Time calculation of <b>CP</b> and <b>W Prime</b> can be accomplished aside all the calculations for determining the Heat Balance terms and setting the fans to the appropriate blowing capacity. Setting on/off this functionality and/or changing your starting <b>CP</b> and <b>W Prime</b> values are also an integral part of the AIRFLOW Companion app! 
