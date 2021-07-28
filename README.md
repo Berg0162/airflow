@@ -267,7 +267,7 @@ I have little experience with App development and decided to build one (for Andr
 + If detected, the Airflow Companion App establishes a connection over BLE (with the AIRFLOW device). From that moment on the Nordic UART service (a.k.a. BLEUART) for exchange of information is applied. A simple dedicated protocol was implemented that allows for bidirectional exchange of short strings containing diagnostic messages and/or operation settings between smartphone and AIRFLOW device.
 + After connection is established, the Airflow device sends the latest (persistent) settings data to allow the App user to assess the current (user set) values.
 + If something went wrong, simply reset (power off/on) the AIRFLOW device and the above procedure is repeated!
-+ <b>Regular operation is now started. The AIRFLOW device controls the fans (within settings) using current HRM and Power data</b>
++ <b>Regular operation is now started. The AIRFLOW device controls the fans (within settings) using current HRM and Power data.</b>
 + Whenever the user changes the current settings or control data during operation, the Airflow Companion App sends these to the Airflow device to immediately apply them. <br>
 # Critical Power on the fly
 <img src="../main/images/CP_W_Prime_Oled.png" width="147" height="147" ALIGN="left" alt="Companion app" >
