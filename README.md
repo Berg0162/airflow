@@ -243,8 +243,8 @@ int Scheduled = -1; // Counter for current OLED display screen, start to show SE
 char DisplaySettings[MAX_SCHEDULED + 1] = "00000000000"; // MAX_SCHEDULED display screen sequence --> all OFF
 // -------------------------------------------------------
 ```
-On the top bar, the double chevron to the left always indicates whether you <b>netto</b> gain (up) or loose (down) internal heat during the workout! Every 10 seconds the content of a new screen in the sequence (of <b>11</b>) is shown. 2 Screens in the sequence (#1 and #9) change of data set during display. The user can switch the <b>11</b> screens to be shown in the sequence <b>on/off</b>, in accordance with his/her preference and at any time during operation with the help of the Airflow Companion App (<b>Display Settings</b>). <br>
-<img src="../main/images/OLED_Scr_1.jpg" width="400" height="400" ALIGN="left" alt="Oled scr collage 1" >
+On the top bar, the double chevron to the left always indicates whether you <b>netto</b> gain (up) or loose (down) internal heat during the workout! Every 10 seconds the content of a new screen in the sequence (of <b>11</b>) is shown. 2 Screens in the sequence (#1 and #9) change of data set during display. The user can switch the <b>11</b> screens to be shown in the sequence <b>on/off</b>, in accordance with his/her preference and at any time during operation with the help of the Airflow Companion App (<b>Display Settings</b>). 
+<img src="../main/images/OLED_Scr_1.jpg" width="400" height="400" ALIGN="right" alt="Oled scr collage 1" > <br clear="left">
 <img src="../main/images/OLED_Scr_2.jpg" width="400" height="400" ALIGN="right" alt="Oled scr collage 2" ><br clear="left">
 # Airflow Companion App <br>
 <img src="../main/images/AIRFLOW_app.jpg" width="800" height="800" ALIGN="middle" alt="Companion app" > <br>
