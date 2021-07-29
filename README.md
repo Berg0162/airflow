@@ -232,8 +232,8 @@ const uint8_t AirSpeedUnit = KPH;
 # OLED 128x64 Presentation Sequence
 <img src="../main/images/OLED_Scr_1.jpg" width="400" height="400" ALIGN="right" alt="Oled scr collage 1" >
 At start-up (power on) the user is informed about the BLE connection process of the <b>AIRFLOW</b> device with Heart Rate Monitor, Power Meter and Smart Phone.
-On the top bar, icons are shown that indicate the (BLE or I2C) connection status of: Heart Rate Monitor, Power Meter, Smart Phone, Humidity and Temperature. During operation a sequence of (<b>11</b>) informative screens are shown on the Blue Oled display that detail the measured or calculated critical values that determine the Heat Balance Equation.<br clear="left">
-<br>
+On the top bar, icons are shown that indicate the (BLE or I2C) connection status of: Heart Rate Monitor, Power Meter, Smart Phone, Humidity and Temperature. During operation a sequence of (<b>11</b>) informative screens are shown on the Blue Oled display that detail the measured or calculated critical values that determine the Heat Balance Equation.<br><br><br clear="left">
+
 ```C++
 
 // Create a SoftwareTimer that will drive our OLED display sequence.
