@@ -232,7 +232,8 @@ const uint8_t AirSpeedUnit = KPH;
 # OLED 128x64 Presentation Sequence
 <img src="../main/images/OLED_Scr_1.jpg" width="400" height="400" ALIGN="right" alt="Oled scr collage 1" >
 At start-up (power on) the user is informed about the BLE connection process of the <b>AIRFLOW</b> device with Heart Rate Monitor, Power Meter and Smart Phone.
-On the top bar, icons are shown that indicate the (BLE or I2C) connection status of: Heart Rate Monitor, Power Meter, Smart Phone, Humidity and Temperature. During operation a sequence of (<b>11</b>) informative screens are shown on the Blue Oled display that detail the measured or calculated critical values that determine the Heat Balance Equation.<br> 
+On the top bar, icons are shown that indicate the (BLE or I2C) connection status of: Heart Rate Monitor, Power Meter, Smart Phone, Humidity and Temperature. During operation a sequence of (<b>11</b>) informative screens are shown on the Blue Oled display that detail the measured or calculated critical values that determine the Heat Balance Equation.<br clear="left">
+
 ```C++
 
 // Create a SoftwareTimer that will drive our OLED display sequence.
@@ -245,7 +246,7 @@ char DisplaySettings[MAX_SCHEDULED + 1] = "00000000000"; // MAX_SCHEDULED displa
 // -------------------------------------------------------
 
 ```
-<br><br><br clear="left">
+<br><br>
 <img src="../main/images/OLED_Scr_2.jpg" width="400" height="400" ALIGN="right" alt="Oled scr collage 2" >
 On the top bar, the double chevron to the left always indicates whether you <b>netto</b> gain (up) or loose (down) internal heat during the workout! Every 10 seconds the content of a new screen in the sequence (of <b>11</b>) is shown. 2 Screens in the sequence (#1 and #9) change of data set during display. The user can switch the <b>11</b> screens to be shown in the sequence <b>on/off</b>, in accordance with his/her preference and at any time during operation with the help of the Airflow Companion App (<b>Display Settings</b>).
 <br><br><br><br><br><br clear="left">
