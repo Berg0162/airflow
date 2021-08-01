@@ -273,3 +273,8 @@ In addition to an ideal airflow velocity for an optimally thermoregulated human 
 If you want to know in more detail about the science, math and implementation...<br clear="right">
 
 [See RT-Critical-Power](https://github.com/Berg0162/RT-Critical-Power)
+
+# AIRFLOW Mechanic Construction
+On the "Instructables" site an instructable is published that focusses most on a low cost construction of a 2-Fans-Holder and integrated mount of the applied circuitry.
+See [AIRFLOW on INSTRUCTABLES](https://www.instructables.com/id/AIRFLOW-Thermoregulated-Cooling-for-Indoor-Cycling/)
+
