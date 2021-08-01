@@ -16,7 +16,7 @@
  * to implement a custom client that is used to talk with Gatt server on
  * peripheral.
  *
- * Note: you will need another feather52 running peripheral/custom_HRM sketch
+ * Note: you will need a Power meter (Cycling Power Service)
  * to test with.
  */
 
