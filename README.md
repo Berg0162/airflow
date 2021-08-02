@@ -303,6 +303,6 @@ If you want to know in more detail about the science, math and implementation...
 [See RT-Critical-Power](https://github.com/Berg0162/RT-Critical-Power)
 
 # AIRFLOW Mechanic Construction
-On the "Instructables" site an instructable is published that focusses most on a low cost construction of a 2-Fans-Holder and integrated mount of the applied circuitry.
+<img src="https://www.instructables.com/assets/img/instructables-logo-v2.png" width="32" height="48" align="left" alt="Instructables"> On the "Instructables" site an instructable is published that focusses most on a low cost construction of a 2-Fans-Holder and integrated mount of the applied circuitry.
 See [AIRFLOW on INSTRUCTABLES](https://www.instructables.com/id/AIRFLOW-Thermoregulated-Cooling-for-Indoor-Cycling/)
 
