@@ -265,10 +265,10 @@ void DisplaySchedular_callback(TimerHandle_t _handle) {
   do {
     if (++Scheduled < MAX_SCHEDULED) {
     } else { // MAX is reached
-      Scheduled = 0; // start all over again
+      Scheduled = 0; // start sequence all over again
     }
-  } while (DisplaySettings[Scheduled] == '0');
-  TimeCaptureMillis = millis();
+  } while (DisplaySettings[Scheduled] == '0'); // Check for No Show screens
+  TimeCaptureMillis = millis(); // Capture start time of presentation interval
 }
 ```
 
