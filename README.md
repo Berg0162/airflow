@@ -56,7 +56,6 @@ The global variables <b>ActualUpperFanPerc</b> and <b>ActualLowerFanPerc</b> are
 #include <nrf_timer.h> // Native nRF52 timers library
 #include <Timer.h>     // Heavy duty micro(!)seconds timer library based on nRF52 timers, needs to reside in the libraries folder
 ```
-
 ```C++
 // Feather nRF52840 I/O Pin declarations for connection to the ROBOTDYN AC DIMMER boards
 #define PWM_PIN_U_FAN  (12U) // Upper Fan 
@@ -68,7 +67,12 @@ The global variables <b>ActualUpperFanPerc</b> and <b>ActualLowerFanPerc</b> are
 #define MAX_TIME_OFF_LOWER (6920U) // Maximal time of half an AC Cycle (10.000us) to be CUT-OFF in microseconds!
 #define MIN_TIME_OFF (2000U)       // Minimal time to process for full power --> NO (!) CUT-OFF situation in microseconds!
 ```
-
+```C++
+...
+  // ISR Function is called 2(!) times in one full 50Hz cycle --> 100 times in a second
+  attachInterrupt(digitalPinToInterrupt(ISR_PIN), zero_Cross_ISR, RISING);  // Set Zero-Crossing Interrupt Service Routine
+...
+```
 ```C++
 void zero_Cross_ISR(void) {
   // Normal mode
