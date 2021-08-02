@@ -271,7 +271,7 @@ void DisplaySchedular_callback(TimerHandle_t _handle) {
       Scheduled = 0; // start sequence all over again
     }
   } while (DisplaySettings[Scheduled] == '0'); // Check for No Show screens
-  TimeCaptureMillis = millis(); // Capture start time of presentation interval
+  TimeCaptureMillis = millis(); // Capture start time of SCHEDULED_TIME interval
 }
 ```
 <br>
