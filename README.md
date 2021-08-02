@@ -248,8 +248,8 @@ int Scheduled = -1; // Counter for current OLED display screen, start to show SE
 char DisplaySettings[MAX_SCHEDULED + 1] = "00000000000"; // MAX_SCHEDULED display screen sequence --> all OFF
 // -------------------------------------------------------
 ```
-<br><br>
-<br clear="left">
+<br><br clear="left">
+
 <img src="../main/images/OLED_Scr_2.jpg" width="400" height="400" ALIGN="right" alt="Oled scr collage 2" >
 
 ```C++
