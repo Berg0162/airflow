@@ -253,6 +253,8 @@ char DisplaySettings[MAX_SCHEDULED + 1] = "00000000000"; // MAX_SCHEDULED displa
   RoundRobin.begin(SCHEDULED_TIME, DisplaySchedular_callback);
   RoundRobin.start();
 ```
+
+<br clear="left">
 ```C++
 // Function to count up after SCHEDULED_TIME for Oled display sequence
 void DisplaySchedular_callback(TimerHandle_t _handle) {
@@ -266,8 +268,6 @@ void DisplaySchedular_callback(TimerHandle_t _handle) {
   TimeCaptureMillis = millis();
 }
 ```
-
-<br clear="left">
 <img src="../main/images/OLED_Scr_2.jpg" width="400" height="400" ALIGN="right" alt="Oled scr collage 2" ><br><br><br><br><br>
 On the top bar, the double chevron to the left always indicates whether you <b>netto</b> gain (up) or loose (down) internal heat during the workout! Every 10 seconds the content of a new screen in the sequence (of <b>11</b>) is shown. 2 Screens in the sequence (#1 and #9) change of data set during display. The user can switch the <b>11</b> screens to be shown in the sequence <b>on/off</b>, in accordance with his/her preference and at any time during operation with the help of the Airflow Companion App (<b>Display Settings</b>).
 <br><br><br><br><br><br clear="left">
