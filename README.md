@@ -254,9 +254,11 @@ char DisplaySettings[MAX_SCHEDULED + 1] = "00000000000"; // MAX_SCHEDULED displa
 <img src="../main/images/OLED_Scr_2.jpg" width="400" height="400" ALIGN="right" alt="Oled scr collage 2" >
 
 ```C++
+...
   // Set up a repeating softwaretimer that fires every SCHEDULED_TIME seconds to invoke the OLED Time Sharing schedular
   RoundRobin.begin(SCHEDULED_TIME, DisplaySchedular_callback);
   RoundRobin.start();
+...
 ```
 
 ```C++
